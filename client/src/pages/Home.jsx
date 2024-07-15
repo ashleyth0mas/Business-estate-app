@@ -155,4 +155,3 @@ offerListings.map((listing)=>(
 export default Home
 
 
-/*I used useRef here to go to specific element within the same page. CHECK IT OUT!! (offers sec)  */
