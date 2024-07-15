@@ -8,12 +8,12 @@ export const test=(req,res)=>{
     };
 
     export const updateUser = async (req, res, next) => {
-        // Check if the authenticated user's ID matches the ID in the request parameters
+
         if (req.user.id !== req.params.id)
           return next(errorHandler(401, 'You can only update your own account!'));
       
         try {
-          // If the request body contains a password, hash it using bcryptjs
+          
           if (req.body.password) {
             req.body.password = bcryptjs.hashSync(req.body.password, 10);
           }
@@ -32,13 +32,13 @@ export const test=(req,res)=>{
             { new: true } // Return the updated document after the update operation
           );
       
-          // Exclude the 'password' field from the updated user document
+
           const { password, ...rest } = updatedUser._doc;
       
-          // Send a JSON response with the updated user data (excluding password)
+          
           res.status(200).json(rest);
         } catch (error) {
-          // Forward any errors to the error handling middleware
+
           next(error);
         }
       };
