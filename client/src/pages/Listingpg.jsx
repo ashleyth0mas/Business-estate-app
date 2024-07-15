@@ -28,9 +28,9 @@ const [copied, setCopied] = useState(false);
 const [contact,setContact]=useState(false)
 const params=useParams()
 
-useEffect(()=>{            //useEffect is mandatory to trigger the functional component that renders the page
+useEffect(()=>{
     fetchListing()
-},[params.listingId])          //[] is the dependency array used to denote when the effect reruns i.e whenever listingId changes the effect reruns or the function is called
+},[params.listingId])
 
 const fetchListing=async()=>{
     try{
@@ -45,7 +45,7 @@ const fetchListing=async()=>{
         }
         setLoading(false)
         setListing(data)   
-        setError(false)     //this is needed coz if I exclude, the error that has been previously set to true when data.success==false still remains as true and we will get the message as "Something went wrong(as specified in the div)"
+        setError(false)
     }
     catch(error){
         setError(true)
@@ -62,7 +62,7 @@ const fetchListing=async()=>{
             <Swiper navigation>
                 {listing.imageUrls.map((url)=>(
                     <SwiperSlide key={url}>
-                         <div                          //we can't use img src to display image it doesn't work so inorder to display follow this 
+                         <div
                   className='h-[550px]'
                   style={{
                     background: `url(${url}) center no-repeat`,
@@ -72,7 +72,7 @@ const fetchListing=async()=>{
                     </SwiperSlide>
                 ))}
             </Swiper>
-        {/* CODE TO IMPLEMENT SHARE USING LINK(upto p tag) */}    
+
             <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
             <FaShare
               className='text-slate-500'
@@ -130,8 +130,7 @@ const fetchListing=async()=>{
              </div>
        ) }
         {contact && <Contact listing={listing}/>}
-    {/*If you want  to render a React component in response to a click event, you should update the component's state to conditionally render the desired component.
-    So, that's why we use contact as state variable to call the react Component <Contact/> */}
+   
          
           
             </div>)}
