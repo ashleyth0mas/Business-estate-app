@@ -29,7 +29,7 @@ const UpdateListing = () => {
     console.log(formData)
     useEffect(()=>{
         const getListingInfo=async()=>{
-         const listingId=params.listingId          //listingId is the id in the url(client). check app.jsx, where there is listingId specified in the route 
+         const listingId=params.listingId         
           const res=await fetch(`/api/listing/getlist/${listingId}`)
           
           const data=await res.json()   
@@ -70,7 +70,7 @@ const UpdateListing = () => {
                 console.log('File available at', downloadURL);
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    imageUrls: [...prevFormData.imageUrls, downloadURL], // Append downloadURL to existing imageUrls array
+                    imageUrls: [...prevFormData.imageUrls, downloadURL], 
                   }));
                   console.log(formData)
                  
