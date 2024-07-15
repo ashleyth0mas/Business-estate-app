@@ -1,20 +1,4 @@
-//to use import keyword make sure package.json has "type":"module"
 
-//change scripts inside package.json as:
-/*  "scripts": {
-   "dev":"nodemon api/index.js",
-   "start":"node api/index.js"
-
-  }, */
-
-  /*The then() method is used with Promises in JavaScript to handle the successful resolution of a Promise. When a Promise is resolved, the then() method is invoked, allowing you to specify what should happen with the resolved value. 
-  Here's the basic syntax:
-  myPromise.then((resolvedValue) => {
-      // Handle the resolved value here
-}).catch((error) => {
-      // Handle errors here
-});
- */
 
 import express from 'express';
 import mongoose from 'mongoose';
