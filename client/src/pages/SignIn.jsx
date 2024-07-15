@@ -5,7 +5,7 @@ import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSli
 import { useDispatch,useSelector } from 'react-redux'
 import Oauth from '../components/Oauth.jsx'
 const SignIn = () => {
-  const [formData,setFormData]=useState({})  //useState hook to initialize a state variable (A state variable is a variable( can be obj,num,array) that holds data representing the state of a component at any given time. ) formData as an empty object {} and a corresponding function setFormData to update this state variable.
+  const [formData,setFormData]=useState({})
  const dispatch=useDispatch()
  const {error,loading} = useSelector((state)=>state.user)
  
@@ -22,16 +22,16 @@ const handleSubmit=async(e)=>{
     try{
         dispatch(signInStart())
         
-        const response=await fetch('/api/auth/signin',{            //fetch('/api/auth/signup', ...): It initiates a request to the specified URL (/api/auth/signup) on the server.The fetch in JavaScript is used to initiate both GET and POST requests to a given URL
-               //fetch returns a Promise (promise refers to an object that represents the eventual completion{if completed it returns a Response object otherwise throws error} (or failure) of an asynchronous operation) 
+        const response=await fetch('/api/auth/signin',{            
+
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify(formData)    //The body of the request, which contains the form data (formData) converted to a JSON string using JSON.stringify()
+            body:JSON.stringify(formData)   
         })
-          // console.log(response)             //returns response object if fetch is successful     
-          const data=await response.json()  //extract json data from response object      
+          // console.log(response)             
+          const data=await response.json()        
           if (data.success==false){
             
              dispatch(signInFailure(data.message))
