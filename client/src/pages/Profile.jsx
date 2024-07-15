@@ -91,37 +91,23 @@ catch(error){
 }
  }
     
-  useEffect(()=>{              //When you pass [file], you're essentially telling React to re-run the effect whenever the file variable changes
-    if(file){                  //here the effect is set up to run the handleFileUpload function whenever the file state changes, ensuring that the file upload process is triggered whenever a new file is selected.
+  useEffect(()=>{              
+    if(file){
       handleFileUpload(file)
     }
   },[file]);
   const handleFileUpload=(file)=>{
-    const storage= getStorage(app);            //initializes( or claiming) the Firebase Storage service. The variable storage now holds a reference to the Firebase Storage service, which can be used to interact with Firebase Storage, such as uploading, downloading, and managing files.      
+    const storage= getStorage(app);
     const fileName=new Date().getTime()+file.name;
-    const storageRef=ref(storage,fileName)     //creates a reference to a specific location within the Firebase Storage where the file will be uploaded.
+    const storageRef=ref(storage,fileName)
     const uploadTask=uploadBytesResumable(storageRef,file)
 
-/*    -------CONCEPT----------
-uploadBytesResumable(storageRef, file): This function initiates the upload of the specified file (file) to the location referenced by storageRef within Firebase Storage. 
-It's called with two parameters:
-1. storageRef: This is the reference to the specific location within Firebase Storage where the file will be uploaded. It was created earlier using ref(storage, fileName).
-2. file: This is the file object that you want to upload. It could be a File object obtained from a file input element in the browser.
-const uploadTask = ...: The result of calling uploadBytesResumable(storageRef, file) is stored in the variable uploadTask. This variable now holds a reference to the upload task, which can be used to monitor the upload progress, pause/resume the upload, or get information about the uploaded file.
-*/
-    uploadTask.on('state_changed',           //uploadTask.on('state_changed', ...): This sets up an event listener for changes in the state of the upload task. Whenever the state changes, the provided callback functions will be called.
-    
-    (snapshot)=>{                         //func 1
-      
-      /* 
-      snapshot object provides information about the current state of the upload process.
-      snapshot object commonly contains:
 
-bytesTransferred: The number of bytes that have been transferred/uploaded so far.
-totalBytes: The total size of the file being uploaded (in bytes).
-state: The current state of the upload task (e.g., 'running', 'paused', 'success', 'error').
-ref: A reference to the location in Firebase Storage where the file is being uploaded.            
-       */
+    uploadTask.on('state_changed',
+    
+    (snapshot)=>{                        
+      
+
       
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setFilePer(Math.round(progress))
@@ -141,7 +127,7 @@ setUploadError(true)
     },
 
   ()=>{                                  //func 3
-    getDownloadURL(uploadTask.snapshot.ref).then((     //getDownloadURL(uploadTask.snapshot.ref): This function retrieves the download URL of the uploaded file using the reference (ref) obtained from the upload task's snapshot object. This URL is typically used to access the uploaded file from the storage location. uploadTask.snapshot.ref allows you to access the Firebase Storage reference to the uploaded file
+    getDownloadURL(uploadTask.snapshot.ref).then((     
       downloadURL)=>{
         setFormData({...formData,avatar:downloadURL})
       }
