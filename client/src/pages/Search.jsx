@@ -34,7 +34,7 @@ const navigate=useNavigate()
     else if(e.target.id=='sort_order'){
       setsidebarData({...sidebarData,sort:e.target.value.split('_')[0]||'createdAt',order:e.target.value.split('_')[1]||'desc'})
     }
-    //ONE WAY(pov:u get this by copilot bahahaha...)
+ 
 
    /* e.preventDefault()
     const searchTerm=document.getElementById('searchTerm').value
@@ -58,7 +58,7 @@ console.log(sidebarData)
   }
  
   
- useEffect(()=>{                //used to make changes to the sidebar with the changes in the url
+ useEffect(()=>{                
     const urlParams=new URLSearchParams(window.location.search)
     setsidebarData({
       searchTerm:urlParams.get('searchTerm')||'',
@@ -91,7 +91,7 @@ console.log(sidebarData)
     fetchListings()
   },[location.search])
 
-  const handleSubmit=(e)=>{       //this is used to set the url when we make changes in the sidebar and clicks on the search button
+  const handleSubmit=(e)=>{       
     e.preventDefault()
     const urlParams=new URLSearchParams()
     urlParams.set('searchTerm',sidebarData.searchTerm)
